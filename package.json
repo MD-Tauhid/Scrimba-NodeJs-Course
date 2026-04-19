@@ -4,7 +4,7 @@
   "description": "exploring the core node.js",
   "license": "ISC",
   "author": "Tauhid",
-  "type": "commonjs",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
