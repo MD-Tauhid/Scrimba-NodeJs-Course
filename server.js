@@ -10,9 +10,14 @@ const server = http.createServer(async (req, res) => {
     if (req.url === "/api" && req.method === "GET") {
         sendJSONResponse(res, 200, data);
     }
-    else if (req.url.startsWith("/api/continent/") && req.method === "GET") {
+    else if (req.url.startsWith("/api/continent") && req.method === "GET") {
         const continent = req.url.split('/').pop();
         const filteredData = data.filter((item) => item.continent.toLocaleLowerCase() === continent.toLocaleLowerCase());
+        sendJSONResponse(res, 200, filteredData);
+    }
+    else if (req.url.startsWith("/api/country") && req.method === "GET") {
+        const country = req.url.split('/').pop();
+        const filteredData = data.filter((item) => item.country.toLocaleLowerCase() === country.toLocaleLowerCase());
         sendJSONResponse(res, 200, filteredData);
     }
     else {
