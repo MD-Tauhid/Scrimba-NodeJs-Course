@@ -1,0 +1,12 @@
+{
+  "name": "scrimba-nodejs-course",
+  "version": "1.0.0",
+  "description": "exploring the core node.js",
+  "license": "ISC",
+  "author": "Tauhid",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
