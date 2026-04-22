@@ -8,6 +8,11 @@ const PORT = 8000;
 const server = http.createServer(async (req, res) => {
     const data = await getDataFromDB();
 
+    const urlObj = new URL(req.url, `http://${req.headers.host}`);
+    const queryObj = Object.fromEntries(urlObj.searchParams);
+    console.log(queryObj);
+    console.log(urlObj);
+
     if (req.url === "/api" && req.method === "GET") {
         sendJSONResponse(res, 200, data);
     }
