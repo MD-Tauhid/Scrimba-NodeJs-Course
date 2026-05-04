@@ -11,7 +11,7 @@ const server = http.createServer(async (req, res) => {
 
     const urlObj = new URL(req.url, `http://${req.headers.host}`);
     const queryObj = Object.fromEntries(urlObj.searchParams);
-    console.log(urlObj);
+    console.log(urlObj.pathname);
 
 
     if (urlObj.pathname === "/api" && req.method === "GET") {
