@@ -2,6 +2,7 @@ import http from "node:http";
 import { getDataFromDB } from "./database/db.js";
 import { sendJSONResponse } from "./utils/sendJSONResponse.js";
 import { getDataByPathParam } from "./utils/getDataByPathParam.js";
+import { getDataByQueryParams } from "./utils/getDataByQueryParams.js";
 
 const PORT = 8000;
 
@@ -12,16 +13,7 @@ const server = http.createServer(async (req, res) => {
     const queryObj = Object.fromEntries(urlObj.searchParams);
 
     if (urlObj.pathname === "/api" && req.method === "GET") {
-        let filteredData = data;
-        if (queryObj.country) {
-            filteredData = filteredData.filter((item) => item.country.toLocaleLowerCase() === queryObj.country.toLocaleLowerCase());
-        }
-        if (queryObj.continent) {
-            filteredData = filteredData.filter((item) => item.continent.toLocaleLowerCase() === queryObj.continent.toLocaleLowerCase());
-        }
-        if (queryObj.openToPublic) {
-            filteredData = filteredData.filter((item) => item.is_open_to_public === queryObj.openToPublic);
-        }
+        const filteredData = getDataByQueryParams(data, queryObj);
         sendJSONResponse(res, 200, filteredData);
     }
     else if (req.url.startsWith("/api/continent") && req.method === "GET") {
